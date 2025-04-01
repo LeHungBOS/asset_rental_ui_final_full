@@ -8,3 +8,4 @@ qrcode
 reportlab
 python-barcode
 itsdangerous
+python-multipart
