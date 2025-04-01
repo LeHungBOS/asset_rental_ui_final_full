@@ -5,12 +5,10 @@ from fastapi.templating import Jinja2Templates
 from starlette.middleware.sessions import SessionMiddleware
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy.future import select
 from sqlalchemy import create_engine, Column, String, Integer, Text
 from pydantic import BaseModel
 from uuid import uuid4
 from typing import Optional
-from pathlib import Path
 import qrcode
 import io
 import os
@@ -24,8 +22,6 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = FastAPI()
-
-# ✅ Đảm bảo middleware chạy đúng
 app.add_middleware(SessionMiddleware, secret_key=os.getenv("SECRET_KEY", "supersecret"))
 
 templates = Jinja2Templates(directory="templates")
@@ -101,3 +97,12 @@ def logout(request: Request):
 @app.get("/", response_class=HTMLResponse)
 def home(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
+
+@app.get("/users", response_class=HTMLResponse)
+def list_users(request: Request):
+    if request.session.get("role") != "admin":
+        raise HTTPException(status_code=403, detail="Bạn không có quyền truy cập")
+    db = SessionLocal()
+    users = db.query(UserDB).all()
+    db.close()
+    return templates.TemplateResponse("users.html", {"request": request, "users": users})
