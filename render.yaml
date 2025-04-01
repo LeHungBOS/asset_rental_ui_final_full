@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: asset-rental-system
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "uvicorn app:app --host 0.0.0.0 --port 10000"
+    envVars:
+      - key: SECRET_KEY
+        value: supersecret
+      - key: DATABASE_URL
+        value: postgresql://asset_rental_ui_final_full_user:WHPwGihoTE4M3JaRKvOIp2I7ykDHTV42@dpg-cvm4emje5dus73c9v360-a/asset_rental_ui_final_full
