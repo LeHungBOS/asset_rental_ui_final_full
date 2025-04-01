@@ -1,11 +1,12 @@
 fastapi
 uvicorn
-sqlalchemy
 jinja2
+python-multipart
+itsdangerous
+sqlalchemy
+pydantic
 python-dotenv
-psycopg2
 qrcode
 reportlab
 python-barcode
-itsdangerous
-python-multipart
+psycopg2-binary
