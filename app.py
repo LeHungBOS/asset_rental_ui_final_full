@@ -27,7 +27,7 @@ app = FastAPI()
 app.add_middleware(SessionMiddleware, secret_key=os.getenv("SECRET_KEY", "supersecret"))
 templates = Jinja2Templates(directory="templates")
 
-DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://asset_rental_ui_final_full_user:WHPwGihoTE4M3JaRKvOIp2I7ykDHTV42@dpg-cvm4emje5dus73c9v360-a/asset_rental_ui_final_full")
+DATABASE_URL = os.getenv("DATABASE_URL")
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(bind=engine, autoflush=False)
 Base = declarative_base()
