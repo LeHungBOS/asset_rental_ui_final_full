@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Trang chủ{% endblock %}
+{% block content %}
+<h1 class="text-2xl font-bold mb-4">🏠 Hệ thống quản lý tài sản</h1>
+<div class="space-x-4">
+  <a href="/assets" class="bg-blue-500 text-white px-4 py-2 rounded">📦 Quản lý thiết bị</a>
+  <a href="/users" class="bg-green-500 text-white px-4 py-2 rounded">👥 Quản lý người dùng</a>
+  <a href="/change-password" class="bg-yellow-500 text-white px-4 py-2 rounded">🔐 Đổi mật khẩu</a>
+  <a href="/logout" class="bg-gray-600 text-white px-4 py-2 rounded">🚪 Đăng xuất</a>
+</div>
+{% endblock %}

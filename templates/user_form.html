@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="text-xl font-bold">{{ user and "🛠️ Sửa" or "➕ Thêm" }} người dùng</h2>
+<form method="post" class="space-y-2">
+  {% if not user %}<input name="username" placeholder="Tên đăng nhập" class="w-full border p-2">{% endif %}
+  <input type="password" name="password" placeholder="Mật khẩu" class="w-full border p-2">
+  <select name="role" class="w-full border p-2">
+    <option value="user" {% if user and user.role == 'user' %}selected{% endif %}>User</option>
+    <option value="admin" {% if user and user.role == 'admin' %}selected{% endif %}>Admin</option>
+  </select>
+  <button class="bg-blue-600 text-white px-4 py-2 rounded">Lưu</button>
+</form>
+<a href="/users" class="text-blue-600 block mt-4">⬅ Quay lại</a>
+{% endblock %}

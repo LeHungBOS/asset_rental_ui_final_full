@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="text-xl font-bold">{{ asset and "🛠️ Sửa" or "➕ Thêm" }} thiết bị</h2>
+<form method="post" class="space-y-2 mt-2">
+  <input name="name" value="{{ asset.name if asset else '' }}" placeholder="Tên" class="w-full border p-2">
+  <input name="code" value="{{ asset.code if asset else '' }}" placeholder="Mã" class="w-full border p-2">
+  <input name="category" value="{{ asset.category if asset else '' }}" placeholder="Loại" class="w-full border p-2">
+  <input name="quantity" type="number" value="{{ asset.quantity if asset else 1 }}" class="w-full border p-2">
+  <textarea name="description" class="w-full border p-2" placeholder="Mô tả">{{ asset.description if asset else '' }}</textarea>
+  <button class="bg-blue-500 text-white px-4 py-2 rounded">Lưu</button>
+</form>
+<a href="/assets" class="text-blue-600 block mt-4">⬅ Quay lại</a>
+{% endblock %}

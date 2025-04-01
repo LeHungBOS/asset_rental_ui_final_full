@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="text-xl font-bold mb-4">📦 Danh sách thiết bị</h2>
+<form method="get" class="mb-4">
+  <input name="keyword" class="border p-1" placeholder="Tìm theo tên...">
+  <button class="bg-blue-500 text-white px-3 py-1">Tìm</button>
+  <a href="/assets/add" class="ml-4 text-blue-600 underline">+ Thêm thiết bị</a>
+</form>
+<table class="w-full border-collapse border">
+  <thead><tr class="bg-gray-100">
+    <th class="border p-2">Tên</th><th class="border p-2">Mã</th><th class="border p-2">Loại</th>
+    <th class="border p-2">SL</th><th class="border p-2">Thao tác</th>
+  </tr></thead>
+  <tbody>
+  {% for a in assets %}
+  <tr>
+    <td class="border p-2">{{ a.name }}</td>
+    <td class="border p-2">{{ a.code }}</td>
+    <td class="border p-2">{{ a.category }}</td>
+    <td class="border p-2">{{ a.quantity }}</td>
+    <td class="border p-2">
+      <a href="/assets/edit/{{ a.id }}" class="text-blue-600">✏️</a>
+      <a href="/assets/delete/{{ a.id }}" class="text-red-600 ml-2" onclick="return confirm('Xóa?')">🗑️</a>
+    </td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+<a href="/assets/export" class="text-blue-600 block mt-2">⬇️ Export CSV</a>
+{% endblock %}

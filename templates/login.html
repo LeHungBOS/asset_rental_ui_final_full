@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Đăng nhập{% endblock %}
+{% block content %}
+<div class="max-w-sm mx-auto bg-white p-6 rounded shadow">
+  <h2 class="text-xl font-semibold mb-4">🔐 Đăng nhập hệ thống</h2>
+  {% if error %}<p class="text-red-500">{{ error }}</p>{% endif %}
+  <form method="post" class="space-y-4">
+    <input name="username" class="w-full border p-2" placeholder="Tên đăng nhập">
+    <input type="password" name="password" class="w-full border p-2" placeholder="Mật khẩu">
+    <button class="bg-blue-600 text-white px-4 py-2 rounded">Đăng nhập</button>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="text-xl font-bold mb-4">👥 Danh sách người dùng</h2>
+<a href="/users/add" class="text-blue-600 mb-2 inline-block">+ Thêm người dùng</a>
+<table class="w-full border-collapse border">
+<tr class="bg-gray-100"><th class="border p-2">Tài khoản</th><th class="border p-2">Quyền</th><th class="border p-2">Thao tác</th></tr>
+{% for u in users %}
+<tr>
+  <td class="border p-2">{{ u.username }}</td>
+  <td class="border p-2">{{ u.role }}</td>
+  <td class="border p-2">
+    <a href="/users/edit/{{ u.id }}" class="text-blue-600">✏️</a>
+    <a href="/users/delete/{{ u.id }}" class="text-red-600 ml-2" onclick="return confirm('Xóa user?')">🗑️</a>
+  </td>
+</tr>
+{% endfor %}
+</table>
+{% endblock %}
