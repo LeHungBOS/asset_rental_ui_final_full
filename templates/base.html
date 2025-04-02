@@ -1,10 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html lang="vi">
 <head>
-  <title>{% block title %}Hệ thống{% endblock %}</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css">
+    <meta charset="UTF-8">
+    <title>{% block title %}Trang chủ{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body class="p-6 font-sans">
-  {% block content %}{% endblock %}
+<body class="bg-gray-100 text-gray-900 font-sans">
+    <div class="container mx-auto p-4">
+        {% if request.session.get("user") %}
+        <div class="flex justify-between mb-4">
+            <div>👋 Xin chào, <strong>{{ request.session.get("user") }}</strong></div>
+            <div>
+                <a href="/logout" class="text-red-600 hover:underline">Đăng xuất</a>
+            </div>
+        </div>
+        {% endif %}
+        {% block content %}{% endblock %}
+    </div>
 </body>
 </html>
