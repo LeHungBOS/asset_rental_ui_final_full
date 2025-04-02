@@ -1,34 +1,32 @@
-# ✅ File app.py đầy đủ tính năng: đăng nhập, phân quyền, quản lý thiết bị, QR/barcode, export CSV
-from fastapi import FastAPI, Request, Form, Query, Response, Depends, HTTPException
+# ✅ File app.py - Chuẩn hoá cho deploy trên Render: đăng nhập, phân quyền, quản lý thiết bị, QR/barcode, export CSV
+from fastapi import FastAPI, Request, Form, Query, HTTPException
 from fastapi.responses import HTMLResponse, RedirectResponse, StreamingResponse
 from fastapi.templating import Jinja2Templates
 from starlette.middleware.sessions import SessionMiddleware
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, declarative_base
 from sqlalchemy import create_engine, Column, String, Integer, Text
 from pydantic import BaseModel
 from uuid import uuid4
 from typing import Optional
-import qrcode
-import io
-import os
-import csv
+from dotenv import load_dotenv
+import qrcode, io, os, csv
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
 import barcode
 from barcode.writer import ImageWriter
-from dotenv import load_dotenv
 
 load_dotenv()
-DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://asset_rental_ui_final_full_user:WHPwGihoTE4M3JaRKvOIp2I7ykDHTV42@dpg-cvm4emje5dus73c9v360-a/asset_rental_ui_final_full")
-SECRET_KEY = os.getenv("SECRET_KEY", "supersecret")
+
 app = FastAPI()
+
+DATABASE_URL = os.getenv("DATABASE_URL")
+SECRET_KEY = os.getenv("SECRET_KEY")
+
+if not DATABASE_URL or not SECRET_KEY:
+    raise RuntimeError("Missing required environment variables: DATABASE_URL or SECRET_KEY")
+
 app.add_middleware(SessionMiddleware, secret_key=SECRET_KEY)
-print("SessionMiddleware loaded")
 templates = Jinja2Templates(directory="templates")
-
-
-
 
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(bind=engine, autoflush=False)
