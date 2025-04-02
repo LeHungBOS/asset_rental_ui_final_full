@@ -20,14 +20,14 @@ from barcode.writer import ImageWriter
 from dotenv import load_dotenv
 
 load_dotenv()
-
+DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://asset_rental_ui_final_full_user:WHPwGihoTE4M3JaRKvOIp2I7ykDHTV42@dpg-cvm4emje5dus73c9v360-a/asset_rental_ui_final_full")
+SECRET_KEY = os.getenv("SECRET_KEY", "supersecret")
 app = FastAPI()
 app.add_middleware(SessionMiddleware, secret_key=SECRET_KEY)
 print("SessionMiddleware loaded")
 templates = Jinja2Templates(directory="templates")
 
-DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://asset_rental_ui_final_full_user:WHPwGihoTE4M3JaRKvOIp2I7ykDHTV42@dpg-cvm4emje5dus73c9v360-a/asset_rental_ui_final_full")
-SECRET_KEY = os.getenv("SECRET_KEY", "supersecret")
+
 
 
 engine = create_engine(DATABASE_URL)
